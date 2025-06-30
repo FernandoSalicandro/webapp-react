@@ -6,11 +6,11 @@ import ReviewCard from "../Components/ReviewCard";
 
 export default function MoviePage() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { slug } = useParams();
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/movies/${id}`).then(resp => {
+        axios.get(`http://localhost:3000/movies/${slug}`).then(resp => {
             const movieDetails = resp.data.data;
             setMovie(movieDetails)
         })

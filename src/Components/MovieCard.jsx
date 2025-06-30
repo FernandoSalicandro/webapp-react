@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 export default function MovieCard({ movie }) {
-    const { id, title, image, abstract } = movie
+    const { id, slug, title, image, abstract } = movie
     return (
         <>
             <div key={id} className="col g-2">
@@ -11,7 +11,7 @@ export default function MovieCard({ movie }) {
                         {abstract}
                         
                     </div>
-                    <Link className='btn btn-primary' to={`/movies/${id}`}>Vedi Dettagli</Link>
+                    <Link className='btn btn-primary' to={`/movies/${slug}`}>Vedi Dettagli</Link>
                 </div>
             </div>
         </>

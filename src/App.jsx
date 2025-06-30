@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+
 import { BrowserRouter, Outlet, Routes, Route } from 'react-router-dom'
 import GuestLayout from './Layout/GuestLayuot'
 import Home from './Pages/Home'
@@ -15,8 +15,7 @@ function App() {
           <Route element={<GuestLayout />}>
             <Route path='/' element={<Home />} />
             <Route path='/movies' element={<Movie />} />
-            <Route path='/movies/:id' element={<MoviePage />} />
-
+            <Route path='/movies/:slug' element={<MoviePage />} />
           </Route>
         </Routes>
       </BrowserRouter>
