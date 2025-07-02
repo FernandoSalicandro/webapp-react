@@ -4,6 +4,7 @@ import GuestLayout from './Layout/GuestLayuot'
 import Home from './Pages/Home'
 import Movie from './Pages/Movies'
 import MoviePage from './Pages/MoviePage'
+import NotFound404 from './Pages/NotFound404'
 
 
 
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/movies' element={<Movie />} />
             <Route path='/movies/:slug' element={<MoviePage />} />
+            <Route path='*' element={<NotFound404 />}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router";
+import { useNavigate } from "react-router";
 import { useParams } from "react-router"
 import axios from "axios";
 import ReviewCard from "../Components/ReviewCard";
+import ReviewForm from "../Components/ReviewForm";
 
 export default function MoviePage() {
     const navigate = useNavigate();
@@ -10,11 +11,24 @@ export default function MoviePage() {
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/movies/${slug}`).then(resp => {
-            const movieDetails = resp.data.data;
-            setMovie(movieDetails)
-        })
-    }, [])
+        axios.get(`http://localhost:3000/movies/${slug}`)
+            .then(resp => {
+                const movieDetails = resp.data.data;
+                setMovie(movieDetails)
+            })
+            .catch((err) => {
+                if(err.status === 404) {
+                    navigate('/not-found')
+                }
+            });
+    }, []);
+
+    const handleReviewAdded = (newReview) => {
+        setMovie(prevMovie => ({
+            ...prevMovie,
+            reviews: [...prevMovie.reviews, newReview]
+        }));
+    };
 
     const goBack = (event) => {
         event.preventDefault()
@@ -40,28 +54,24 @@ export default function MoviePage() {
                             <h2>Recensioni</h2>
                             {movie.reviews.length === 0 ? (
                                 <div className="alert alert-info">Nessuna recensione per questo film</div>
-                            ) : <div className="row row-cols-1 g-3">
-                                {movie.reviews.map(curReview => {
-                                    return (
+                            ) : (
+                                <div className="row row-cols-1 g-3">
+                                    {movie.reviews.map(curReview => (
                                         <div className="col" key={curReview.id}>
                                             <ReviewCard review={curReview} />
-
                                         </div>
-                                    )
+                                    ))}
+                                </div>
+                            )}
 
-                                })}
-                            </div>
-
-                            }
+                            <ReviewForm 
+                                movieId={movie.id} 
+                                onReviewAdded={handleReviewAdded}
+                            />
                         </div>
-
-
                     </section>
                 </>
-
             )}
-
-
         </main>
-    )
+    );
 }
