@@ -5,6 +5,7 @@ import Home from './Pages/Home'
 import Movie from './Pages/Movies'
 import MoviePage from './Pages/MoviePage'
 import NotFound404 from './Pages/NotFound404'
+import CreateMovie from './Pages/CreateMovie'
 
 
 
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/movies' element={<Movie />} />
             <Route path='/movies/:slug' element={<MoviePage />} />
+            <Route path='/create-movie' element={<CreateMovie />} />
             <Route path='*' element={<NotFound404 />}/>
           </Route>
         </Routes>

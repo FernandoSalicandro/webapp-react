@@ -12,6 +12,10 @@ export default function Header() {
         {
             title: 'Movies',
             url: '/movies'
+        },
+        {
+            title: 'Aggiungi Film',
+            url: '/create-movie'
         }
     ]
 
